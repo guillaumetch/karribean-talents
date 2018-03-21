@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Tableau de bord
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {% block menu %}
+        <header>
+            <div class="navbar-fixed">
+                <nav class="white">
+                    <div class="nav-wrapper center-align">
+                        <a href="#" data-activates="mobile-demo" class="button-collapse "><i class="material-icons">menu</i></a>
+                        <a href="#" class="hide-on-large-only show-on-small">Karibbean Talent</a>
+                        <a class="btn-border waves-effect waves-light btn hide-on-med-and-down black white-text darken-4" href="{{ path('home') }}"><strong>Accueil</strong></a>
+
+                        <a class="btn-border waves-effect waves-light btn hide-on-med-and-down orange accent-1 black-text"  href="{{ path('edit_presentation') }}"><strong>Présentation</strong></a>
+
+                        <a class="dropdown-button btn-border waves-effect waves-light btn hide-on-med-and-down red accent-1 black-text" data-activates="actualites"><strong>Actualités</strong></a>
+                        <ul id="actualites" class="dropdown-content">
+                            <li><a href="{{ path('dashboard_news') }}">News</a></li>
+                            <li><a href="{{ path('dashboard_events') }}">Evenements</a></li>
+                        </ul>
+
+                        <a class="dropdown-button btn-border waves-effect waves-light btn hide-on-med-and-down blue accent-1 black-text" data-activates="artworks"><strong>Nos oeuvres</strong></a>
+                        <ul id="artworks" class="dropdown-content">
+                            <li><a href="{{ path('dashboard_art') }}">Arts</a></li>
+                            <li><a href="{{ path('dashboard_art_form') }}">Formes d'art</a></li>
+                        </ul>
+
+                        <a class="btn-border waves-effect waves-light btn hide-on-med-and-down blue accent-1 black-text" href="#"><strong>News letter</strong></a>
+                        {#<a class="btn-border waves-effect waves-light btn hide-on-med-and-down green accent-1 black-text" href="#"><strong>Enchères</strong></a>#}
+                        <a class="btn-border waves-effect waves-light btn hide-on-med-and-down green accent-1 black-text" href="#"><strong>Commandes</strong></a>
+                        <ul class="right hide-on-med-and-down">
+                            {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                                <li>
+                                    <a class='dropdown-button btn black' href='#' data-activates='dropdown1'><i class="material-icons center">person</i></a>
+
+                                    <!-- Dropdown Structure -->
+                                    <ul id="dropdown1" class="dropdown-content">
+                                        <li><a href="{{ path('fos_user_security_logout') }}"><i class="material-icons left">power_settings_new</i> Déconnexion</a></li>
+                                    </ul>
+
+                                </li>
+                            {% else %}
+                                <li>
+                                    <a class="waves-effect waves-light btn modal-trigger black" href="#auth"><i class="material-icons center">person</i></a>
+                                </li>
+                            {% endif %}
+                            <li>
+                                <a class="waves-effect waves-light btn modal-trigger black" href="#modal2">
+                                    <i class="material-icons">search</i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+        </header>
+    {% endblock %}
+    {% block content %}
+        <main>
+            <img class="responsive-img" src="{{ asset('bundles/app/img/header_5_select_2.png') }}">
+        </main>
+    {% endblock %}
+
+{% endblock %}
+
+{% block lib_javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

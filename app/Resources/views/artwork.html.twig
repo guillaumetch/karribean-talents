@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+{% block title %} Ajouter une oeuvre
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+    {% block menu %}
+        {{ parent() }}
+    {% endblock %}
+    {% block content%}
+        <div class="parallax-container">
+            <div class="parallax"><img src="{{ asset('bundles/app/img/header_5_select_2.png') }}"></div>
+        </div>
+        <div class="section">
+            <div class="row container">
+                <div class="col offset-l1 l10 center">
+                    <h4>Ajouter une oeuvre</h4>
+                    <div class="divider"></div>
+                    {#<img class="responsive-img-center circle marg-t-2" src="{{ asset('uploads/artwork_media/') | imagine_filter('my_thumb') }}" />#}
+                </div>
+
+                {{ form_start(form, {'method': 'post', 'action': path('artwork'), 'attr': {'class': 'col l12 form','enctype':'multipart/form-data'}}) }}
+                <div class="col l6 center marg-t-2">
+                    {{ form_label(form.media,"Média :") }}
+                    {{ form_widget(form.media) }}
+                </div>
+
+                <div class="col l6 center marg-t-2">
+                    <div class="col l12">
+                        {{ form_label(form.art,"Art :") }}
+                        {{ form_widget(form.art) }}
+                    </div>
+                    <div class="col l12">
+                        {{ form_label(form.artform,"Forme(s) d'art :") }}
+                        {{ form_widget(form.artform) }}
+                    </div>
+                    <div class="col l12 marg-t-5">
+                        {{ form_label(form.title,"Titre :") }}
+                        {{ form_widget(form.title) }}
+                    </div>
+                    <div class="col l12 marg-t-5">
+                        {{ form_label(form.description,"Description :") }}
+                        {{ form_widget(form.description) }}
+                    </div>
+                </div>
+
+               {#<div class="col offset-l1 l10 center marg-t-2">
+                </div>
+                <div class="col offset-l1 l10 center marg-t-2">
+                </div>#}
+
+                <div class="col s12 l12 center marg-t-2">
+                    <input class="btn waves-effect black" type="submit" value="Enregistrer" />
+                    <a class="btn waves-effect black">Annuler</a>
+                </div>
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+        <div class="parallax-container">
+            <div class="parallax"><img src="{{ asset('bundles/app/img/header_5_select_2.png') }}"></div>
+        </div>
+    {% endblock %}
+    {% block footer %}
+    {% endblock %}
+{% endblock %}
+{% block lib_javascripts %}
+    {{ parent() }}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        var art = $('#appbundle_artwork_art');
+        // When sport gets selected ...
+        art.change(function() {
+            // ... retrieve the corresponding form.
+            var form = $(this).closest('form');
+            // Simulate form data, but only include the selected sport value.
+            var data = {};
+            data['id'] = art.val();
+            // Submit data via AJAX to the form's action path.
+            $.ajax({
+                url : form.attr('action'),
+                type: form.attr('method'),
+                data : data,
+                success: function(response) {
+                    var artform = $('#appbundle_artwork_artform');
+                    artform.empty();
+                    for(var i =0; i < response['artforms'].length;i++){
+                        artform.append('<option value="'+response['artforms'][i]['id'] +'"> '+ response['artforms'][i]['name'] +' </option>');
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'back/dashboard.html.twig' %}
+{% block title %}
+    Ajouter une forme d'art
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+    {% block menu %}
+        {{ parent() }}
+    {% endblock %}
+    {% block content %}
+        <main>
+            <div class="row container">
+                <div class="col l12">
+                    <h2 class="center-align">Ajouter une forme d'art</h2>
+                    {{ form_start(form, {'method': 'post', 'action': path('dashboard_art_form_create'), 'attr': {'class': 'form marg-t-5'}}) }}
+                    <div class="col offset-l3 l6">
+                        <div class="input-field col l12">
+                            {{ form_label(form.libelle,"Libellé") }}
+                            {{ form_widget(form.libelle) }}
+                        </div>
+                        <div class="col l12 ">
+                            {{ form_label(form.art,"Art associé") }}
+                            {{ form_widget(form.art) }}
+                        </div>
+                    </div>
+                    <div class="center-align col l12">
+                        <input class="btn waves-effect black center-align" type="submit" value="Ajouter">
+                        <a class="btn red" href="{{ path('dashboard_art_form') }}">Retour</a>
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </main>
+    {% endblock %}
+{% endblock%}
+{% block lib_javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('select').material_select();
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'back/dashboard.html.twig' %}
+{% block title %}
+    Modifier une news
+{% endblock %}ss
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+    {% block menu %}
+        {{ parent() }}
+    {% endblock %}
+    {% block content %}
+        <main>
+            <div class="row container">
+                <div class="col l12">
+                    <h2 class="center-align">Modifier une news</h2>
+                    {{ form_start(form, {'method': 'post', 'attr': {'class': 'form marg-t-5'}}) }}
+                    <div class="input-field col offset-l3 l6">
+                        {{ form_label(form.title,"Titre") }}
+                        {{ form_widget(form.title) }}
+                    </div>
+                    <div class="input-field col offset-l3 l6 mar">
+                        {{ form_label(form.content,"Contenu") }}
+                        {{ form_widget(form.content) }}
+                    </div>
+                    <div class="center-align col l12">
+                        <input class="btn waves-effect black center-align" type="submit" value="Modifier">
+                        <a class="btn red" href="{{ path('dashboard_news') }}">Retour</a>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </main>
+    {% endblock %}
+{% endblock %}
+{% block lib_javascripts %}
+    {{ parent() }}
+{% endblock %}

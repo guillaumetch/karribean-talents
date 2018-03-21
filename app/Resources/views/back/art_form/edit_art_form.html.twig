@@ -1,0 +1,41 @@
+{% extends 'back/dashboard.html.twig' %}
+{% block title %}
+    Modifier une forme d'art
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+    {% block menu %}
+        {{ parent() }}
+    {% endblock %}
+    {% block content %}
+        <main>
+            <div class="row container">
+                <div class="col l12">
+                    <h2 class="center-align">Modifier une forme d'art</h2>
+                    {{ form_start(form, {'method': 'post', 'attr': {'class': 'form marg-t-5'}}) }}
+                    <div class="col offset-l3 l6">
+                        <div class="input-field">
+                            {{ form_label(form.libelle,"Libellé") }}
+                            {{ form_widget(form.libelle) }}
+                        </div>
+                        <div class="input-field">
+                            {{ form_label(form.subcategories,"Sous catégories") }}
+                            {{ form_widget(form.subcategories) }}
+                        </div>
+                    </div>
+                    <div class="center-align col l12">
+                        <input class="btn waves-effect black center-align" type="submit" value="Modifier">
+                        <a class="btn red" href="{{ path('dashboard_subcategory') }}">Retour</a>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </main>
+    {% endblock %}
+{% endblock %}
+{% block lib_javascripts %}
+    {{ parent() }}
+{% endblock %}

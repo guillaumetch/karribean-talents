@@ -1,0 +1,54 @@
+{% extends 'back/dashboard.html.twig' %}
+{% block title %}
+    Modifier un événement
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+    {% block menu %}
+        {{ parent() }}
+    {% endblock %}
+    {% block content %}
+        <main>
+            <div class="row container">
+                <div class="col l12">
+                    <h2 class="center-align">Modifier un événement</h2>
+                    {{ form_start(form, {'method': 'post', 'attr': {'class': 'form marg-t-5'}}) }}
+                    <div class="col l6 center-align marg-t-2">
+                        <img class="responsive-img-center marg-t-2" src="{{ asset('uploads/evts_img/' ~ img) | imagine_filter('evenements') }}" />
+                        <div class="col l12">
+                            {{ form_label(form.media,"Média :") }}
+                            {{ form_widget(form.media) }}
+                        </div>
+
+                    </div>
+                    <div class="col l6">
+                        <div class="input-field">
+                            {{ form_label(form.title,"Titre") }}
+                            {{ form_widget(form.title) }}
+                        </div>
+                        <div class="input-field">
+                            {{ form_label(form.description,"Description") }}
+                            {{ form_widget(form.description) }}
+                        </div>
+                        <div class="input-field">
+                            {{ form_label(form.location,"Lieu") }}
+                            {{ form_widget(form.location) }}
+                        </div>
+                        <div class="center-align col l12">
+                            <input class="btn waves-effect black center-align" type="submit" value="Modifier">
+                            <a class="btn red" href="{{ path('dashboard_events') }}">Retour</a>
+                        </div>
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </main>
+    {% endblock %}
+{% endblock %}
+{% block lib_javascripts %}
+    {{ parent() }}
+{% endblock %}

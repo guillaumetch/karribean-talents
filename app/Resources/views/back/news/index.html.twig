@@ -1,0 +1,85 @@
+{% extends 'back/dashboard.html.twig' %}
+{% block title %}
+    News
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/app/material.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/app/datatable.css') }}">
+{% endblock %}
+{% block body %}
+    {% block menu %}
+        {{ parent() }}
+    {% endblock %}
+    {% block content %}
+        <main>
+            <div class="row container">
+                <div class="col l12 marg-t-5">
+                    <div class="col l12 center-align">
+                        <a class="btn green" href="{{ path('create_news') }}">Ajouter une news</a>
+                    </div>
+                    <table id="example" class="mdl-data-table" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>Titre</th>
+                            <th>Contenu</th>
+                            <th>Crée le</th>
+                            <th>Dernière modification</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+    {% endblock %}
+{% endblock %}
+{% block lib_javascripts %}
+    {{ parent() }}
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.material.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#example').DataTable( {
+                responsive :true,
+                data : {{ data |raw }},
+                order:{'createAt':'DESC'},
+                dom: 'rftp',
+                "language": {
+                    "url": "{{ asset('bundles/app/lang/French.json') }}"
+                },
+                "columns": [
+
+                    {
+                        "data": "title"
+                    },
+                    {
+                        "data": "content",
+                        render: function ( data, type, row ) {
+                            return data.length > 10 ?
+                                data.substr( 0, 20) +'…' :
+                                data;
+                        }
+                    },
+                    {
+                        "data": "createAt"
+                    },
+                    {
+                        "data": "updateAt"
+                    },
+                    {
+                        "data": "actions",
+                        "width": "15%"
+                    }
+                ]
+            } );
+        } );
+    </script>
+{% endblock %}
+
